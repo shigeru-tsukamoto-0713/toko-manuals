@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陶庫 業務運用マニュアル</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --clay-dark: #4a3728;
+      --clay-medium: #7d5a4a;
+      --clay-light: #b8967a;
+      --glaze-teal: #3d7c7c;
+      --glaze-teal-light: #5a9e9e;
+      --cream: #f7f3ed;
+      --cream-dark: #e8e0d5;
+      --ink: #2a2420;
+      --white: #ffffff;
+      --priority-1: #c54b4b;
+      --priority-2: #d4a84b;
+      --complete: #4a8c5c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      text-align: center;
+      padding: 48px 24px;
+      background: linear-gradient(135deg, var(--clay-dark) 0%, var(--clay-medium) 100%);
+      border-radius: 0 0 24px 24px;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: var(--cream);
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    section {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(74, 55, 40, 0.08);
+    }
+
+    h2 {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--clay-dark);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--clay-light);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2 .number {
+      background: var(--glaze-teal);
+      color: var(--white);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--clay-medium);
+      margin: 24px 0 12px;
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    .purpose-box {
+      background: var(--glaze-teal);
+      color: var(--white);
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .purpose-box h3 {
+      color: var(--white);
+      margin-top: 0;
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+
+    .purpose-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .purpose-box li {
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .purpose-box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      opacity: 0.8;
+    }
+
+    .rule-box {
+      border: 2px solid var(--clay-light);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+      background: var(--cream);
+    }
+
+    .rule-box.warning {
+      border-color: var(--priority-1);
+      background: rgba(197, 75, 75, 0.05);
+    }
+
+    .rule-box .title {
+      font-weight: 700;
+      color: var(--clay-dark);
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card.highlight {
+      background: var(--glaze-teal);
+      color: var(--white);
+    }
+
+    .card .label {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-bottom: 8px;
+    }
+
+    .card .value {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--clay-dark);
+    }
+
+    .card.highlight .value {
+      color: var(--white);
+    }
+
+    .card .unit {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    th {
+      background: var(--clay-dark);
+      color: var(--white);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+
+    th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+      background: var(--cream);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--glaze-teal), var(--clay-light));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 24px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item .time {
+      position: absolute;
+      left: -40px;
+      width: 32px;
+      height: 32px;
+      background: var(--glaze-teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .timeline-item .content {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .timeline-item .content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--clay-dark);
+      margin-bottom: 8px;
+    }
+
+    .timeline-item .content p {
+      font-size: 14px;
+      color: var(--clay-medium);
+      margin: 0;
+    }
+
+    .priority-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .priority-1 {
+      background: var(--priority-1);
+      color: var(--white);
+    }
+
+    .priority-2 {
+      background: var(--priority-2);
+      color: var(--white);
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      padding: 12px 0;
+      padding-left: 32px;
+      position: relative;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+
+    .checklist li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      color: var(--glaze-teal);
+      font-size: 18px;
+    }
+
+    .example-box {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .example-box .bad {
+      color: var(--priority-1);
+      text-decoration: line-through;
+      margin-bottom: 8px;
+    }
+
+    .example-box .good {
+      color: var(--complete);
+    }
+
+    .note-box {
+      background: rgba(61, 124, 124, 0.1);
+      border-left: 4px solid var(--glaze-teal);
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--clay-medium);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>業務運用マニュアル</h1>
+  <p>陶庫「仕事の型」─ 生産性を最大化する業務フロー</p>
+</header>
+
+<div class="container">
+
+  <!-- 目的 -->
+  <section>
+    <div class="purpose-box">
+      <h3>このマニュアルの目的</h3>
+      <p style="margin-bottom: 16px; opacity: 0.9; font-size: 14px;">「仕事の型」を確立し、長時間労働とタスクの属人化を解消する</p>
+      <ul>
+        <li><strong>確実な遂行力</strong>：「今日やるべきこと」を就業時間内に確実に完了させる</li>
+        <li><strong>リソースの可視化</strong>：誰がどの程度の業務を抱えているかを定量的に把握し、負荷分散を行う</li>
+        <li><strong>予実管理の徹底</strong>：業務時間の見積もり精度を高め、計画的な店舗運営を行う</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ルール1: タスク粒度 -->
+  <section>
+    <h2><span class="number">1</span>タスクは「30分以内」で設計する</h2>
+    
+    <p>タスクの粒度を細かくすることで、時間の見積もり精度が向上します。30分を超える場合は分割してください。「まとめタスク」「一式タスク」は禁止です。</p>
+
+    <div class="example-box">
+      <div class="bad">❌ POP作成（60分）</div>
+      <div class="good">
+        ✓ POP文言作成（15分）<br>
+        ✓ POPデザイン下書き（30分）<br>
+        ✓ POP印刷・設置（15分）
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>想定時間の設定</strong><br>
+      想定時間は少し多めに見積もることを推奨します。タスクを細かく分割すると、見積もり精度は自然と向上します。
+    </div>
+  </section>
+
+  <!-- ルール2: 優先度 -->
+  <section>
+    <h2><span class="number">2</span>タスクには「優先度」を設定する</h2>
+
+    <p>すべてのタスクに、以下のいずれかを設定してください。</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="label">必達タスク</div>
+        <div style="margin: 12px 0;">
+          <span class="priority-tag priority-1">優先度1</span>
+        </div>
+        <p style="font-size: 13px; color: var(--clay-medium); margin: 0;">今日中に必ず完了させる</p>
+      </div>
+      <div class="card">
+        <div class="label">余力があれば</div>
+        <div style="margin: 12px 0;">
+          <span class="priority-tag priority-2">優先度2</span>
+        </div>
+        <p style="font-size: 13px; color: var(--clay-medium); margin: 0;">時間に余裕があれば着手</p>
+      </div>
+    </div>
+
+    <div class="rule-box warning">
+      <div class="title">重要</div>
+      <p style="margin: 0;">優先度の設定は<strong>帰る前</strong>に行います。翌日の「必達タスク」を上限時間内で仮設定してから退勤してください。</p>
+    </div>
+  </section>
+
+  <!-- ルール3: 上限時間 -->
+  <section>
+    <h2><span class="number">3</span>「必達タスク」の上限時間を守る</h2>
+
+    <p>接客や突発対応を考慮し、計画として積める上限時間を設定しています。この上限を超える計画は禁止です。</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>職種</th>
+          <th>平日</th>
+          <th>土日祝</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>フロントスタッフ</td>
+          <td><strong>200分</strong></td>
+          <td><strong>100分</strong></td>
+        </tr>
+        <tr>
+          <td>バックオフィス</td>
+          <td><strong>300分</strong></td>
+          <td><strong>300分</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      上限を超えている場合は、優先度2に下げるか、他メンバーに依頼してください。
+    </div>
+  </section>
+
+  <!-- 一日の流れ -->
+  <section>
+    <h2><span class="number">4</span>一日の流れ</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time">9:00</div>
+        <div class="content">
+          <h4>朝礼 ─ 計画の確定</h4>
+          <p>全員の「必達タスク」が上限時間内に収まっているか確認・調整</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">日中</div>
+        <div class="content">
+          <h4>業務中 ─ 実行と即時更新</h4>
+          <p>タスク完了後、すぐにAsanaを「完了」に変更</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">夕方</div>
+        <div class="content">
+          <h4>終礼前 ─ Asanaを最新に</h4>
+          <p>完了漏れがないか確認。未完了タスクはSlackで報告</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">終礼</div>
+        <div class="content">
+          <h4>終礼 ─ 予実の確認</h4>
+          <p>未達の原因を分析し、翌日の見積もり精度向上に繋げる</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">退勤</div>
+        <div class="content">
+          <h4>退勤前 ─ 翌日の準備</h4>
+          <p>翌日の「必達タスク」を上限内で仮設定してから退勤</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 帰る前のチェック -->
+  <section>
+    <h2><span class="number">5</span>退勤前に必ずやること</h2>
+
+    <div class="rule-box" style="border-color: var(--glaze-teal); margin-bottom: 20px;">
+      <div class="title" style="color: var(--glaze-teal);">最優先</div>
+      <p style="font-size: 16px;"><strong>翌日の「必達タスク」を上限時間内で仮設定</strong>してから退勤</p>
+    </div>
+
+    <ul class="checklist">
+      <li>完了しているのに「完了」にしていないタスクがないか確認<br>
+        <span style="font-size: 12px; color: var(--clay-medium);">※ 基本的にあってはならない。タスク完了時に即「完了」にすることが重要</span></li>
+      <li>未完了タスク → <strong>Slackで理由を報告</strong>し、翌日の優先度を設定</li>
+    </ul>
+
+    <div class="rule-box warning">
+      <div class="title">重要</div>
+      <p>この「最新化」が崩れると、翌日の計画も朝礼も機能しなくなります。</p>
+    </div>
+  </section>
+
+  <!-- Slack運用 -->
+  <section>
+    <h2><span class="number">6</span>Slack運用（最小限）</h2>
+
+    <p>Slackは「他メンバーが関わるタスク」の共有に使います。個人で完結するタスクはAsana完了のみでOKです。</p>
+
+    <h3>投稿内容（2点セット）</h3>
+    <ul class="checklist">
+      <li>完了したこと</li>
+      <li>次に着手すること</li>
+    </ul>
+
+    <div class="example-box">
+      <div class="good">
+        「POP文言作成 完了 → 次：POPデザイン下書き」<br>
+        「商品写真セレクト 完了 → 次：商品情報入力」
+      </div>
+    </div>
+
+    <div class="note-box">
+      長文報告は禁止です。続かない仕組みは定着しません。
+    </div>
+  </section>
+
+  <!-- 一日にやること -->
+  <section>
+    <h2><span class="number">✓</span>一日にやること</h2>
+
+    <div style="background: var(--clay-dark); border-radius: 12px; padding: 24px; color: var(--white);">
+      
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+        <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; text-align: center; border-top: 3px solid var(--glaze-teal);">
+          <div style="font-size: 12px; opacity: 0.8; margin-bottom: 4px;">9:00</div>
+          <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">朝礼</div>
+          <div style="font-size: 12px; opacity: 0.9;">チーム全体の動きを確認し優先業務をすり合わせ</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; text-align: center; border-top: 3px solid #5a8eae;">
+          <div style="font-size: 12px; opacity: 0.8; margin-bottom: 4px;">日中</div>
+          <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">業務中</div>
+          <div style="font-size: 12px; opacity: 0.9;">完了したら即Asana更新、関係者にはSlack報告</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; text-align: center; border-top: 3px solid #d4a84b;">
+          <div style="font-size: 12px; opacity: 0.8; margin-bottom: 4px;">17:50</div>
+          <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">終礼</div>
+          <div style="font-size: 12px; opacity: 0.9;">必達タスクの完了確認、見積もりズレを把握</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.15); border-radius: 8px; padding: 16px; text-align: center; border-top: 3px solid #c54b4b;">
+          <div style="font-size: 12px; opacity: 0.8; margin-bottom: 4px;">退勤前</div>
+          <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">翌日準備</div>
+          <div style="font-size: 12px; color: #ffcccc;"><strong>翌日の必達タスクを上限内で設定して帰る</strong></div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2);">
+        <span style="font-size: 13px; opacity: 0.8;">毎日やること：</span>
+        <div style="background: rgba(255,255,255,0.15); padding: 8px 14px; border-radius: 20px; font-size: 12px;">📝 30分以内に分割</div>
+        <span style="opacity: 0.5;">→</span>
+        <div style="background: rgba(255,255,255,0.15); padding: 8px 14px; border-radius: 20px; font-size: 12px;">⏱️ 上限内で計画</div>
+        <span style="opacity: 0.5;">→</span>
+        <div style="background: rgba(255,255,255,0.15); padding: 8px 14px; border-radius: 20px; font-size: 12px;">✅ 完了したら即更新</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 導入のコツ -->
+  <section>
+    <h2><span class="number">7</span>導入のコツ</h2>
+
+    <ul class="checklist">
+      <li>最初の2週間は「完璧さ」より「継続」を優先する</li>
+      <li>ルール違反が出たら、注意よりも朝礼で数値（上限）に戻す</li>
+      <li>タスク分割（30分以下）が守れない場合は、分割を手伝って型を覚えさせる</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  有限会社 陶庫
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陶庫「仕事の型」</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --clay: #4a3728;
+      --teal: #3d7c7c;
+      --cream: #f7f3ed;
+      --red: #c54b4b;
+      --yellow: #d4a84b;
+      --green: #5a8e6a;
+      --blue: #5a7e9e;
+      --gray: #666666;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #fff;
+    }
+
+    .page {
+      width: 1200px;
+      height: 800px;
+      margin: 0 auto;
+      background: var(--cream);
+      padding: 32px 40px;
+      position: relative;
+    }
+
+    /* ヘッダー */
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--clay);
+    }
+
+    .header .subtitle {
+      font-size: 14px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* メインコンテンツ */
+    .main {
+      display: flex;
+      gap: 24px;
+      height: calc(100% - 80px);
+    }
+
+    /* 左カラム：3大ルール */
+    .left-col {
+      width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-label {
+      background: var(--clay);
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .rule-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      flex: 1;
+    }
+
+    .rule-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .rule-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--clay);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    /* ルール1 */
+    .r1-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .gauge {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: conic-gradient(var(--teal) 0deg 270deg, #e0e0e0 270deg 360deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .gauge-inner {
+      width: 50px;
+      height: 50px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gauge-num {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--clay);
+      line-height: 1;
+    }
+
+    .gauge-label {
+      font-size: 8px;
+      color: var(--gray);
+    }
+
+    .split-demo {
+      flex: 1;
+    }
+
+    .split-before {
+      background: #d8d0c5;
+      height: 14px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+
+    .split-arrow {
+      text-align: center;
+      font-size: 10px;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+
+    .split-after {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .split-bar {
+      background: var(--green);
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .split-note {
+      font-size: 10px;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* ルール2 */
+    .priority-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .priority-tag {
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .p1 { background: var(--red); }
+    .p2 { background: var(--yellow); }
+
+    .priority-desc {
+      font-size: 12px;
+      color: var(--clay);
+    }
+
+    /* ルール3 */
+    .limit-bar {
+      height: 18px;
+      background: linear-gradient(to right, var(--green) 0%, var(--green) 65%, #e0e0e0 65%, #e0e0e0 100%);
+      border-radius: 4px;
+      position: relative;
+      margin: 12px 0 6px;
+    }
+
+    .limit-bar-line {
+      position: absolute;
+      left: 65%;
+      top: -6px;
+      height: calc(100% + 12px);
+      border-left: 2px dashed var(--clay);
+    }
+
+    .limit-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .limit-table {
+      display: flex;
+      gap: 8px;
+    }
+
+    .limit-col {
+      flex: 1;
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .limit-col-title {
+      font-size: 10px;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .limit-col-num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .limit-col-sub {
+      font-size: 9px;
+      color: var(--gray);
+    }
+
+    /* 右カラム：一日の流れ */
+    .right-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .flow-container {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flow-timeline {
+      display: flex;
+      align-items: stretch;
+      flex: 1;
+      position: relative;
+    }
+
+    .flow-timeline::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 40px;
+      right: 40px;
+      height: 3px;
+      background: linear-gradient(to right, var(--teal), var(--blue), var(--yellow), var(--red));
+      border-radius: 2px;
+    }
+
+    .flow-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-item:nth-child(odd) .flow-card {
+      margin-bottom: auto;
+    }
+
+    .flow-item:nth-child(even) .flow-card {
+      margin-top: auto;
+    }
+
+    .flow-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .flow-item:nth-child(1) .flow-dot { border-color: var(--teal); }
+    .flow-item:nth-child(2) .flow-dot { border-color: var(--blue); }
+    .flow-item:nth-child(3) .flow-dot { border-color: var(--yellow); }
+    .flow-item:nth-child(4) .flow-dot { border-color: var(--red); }
+
+    .flow-card {
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 12px;
+      width: 160px;
+      text-align: center;
+      border-top: 3px solid;
+    }
+
+    .flow-item:nth-child(1) .flow-card { border-color: var(--teal); }
+    .flow-item:nth-child(2) .flow-card { border-color: var(--blue); }
+    .flow-item:nth-child(3) .flow-card { border-color: var(--yellow); }
+    .flow-item:nth-child(4) .flow-card { border-color: var(--red); }
+
+    .flow-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray);
+      margin-bottom: 2px;
+    }
+
+    .flow-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--clay);
+      margin-bottom: 6px;
+    }
+
+    .flow-do {
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .flow-do strong {
+      color: var(--clay);
+    }
+
+    .flow-connector {
+      width: 2px;
+      height: 24px;
+      background: var(--gray);
+      opacity: 0.3;
+    }
+
+    /* フッター */
+    .footer {
+      background: var(--clay);
+      border-radius: 8px;
+      padding: 16px 24px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .footer-title {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .footer-steps {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .footer-step-icon {
+      font-size: 14px;
+    }
+
+    .footer-arrow {
+      opacity: 0.5;
+      font-size: 12px;
+    }
+
+    .company {
+      position: absolute;
+      bottom: 12px;
+      right: 20px;
+      font-size: 10px;
+      color: var(--gray);
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  
+  <!-- ヘッダー -->
+  <div class="header">
+    <h1>陶庫「仕事の型」</h1>
+    <p class="subtitle">生産性を最大化する業務フロー</p>
+  </div>
+
+  <div class="main">
+    
+    <!-- 左カラム：3大ルール -->
+    <div class="left-col">
+      <div class="section-label">業務計画の3大ルール</div>
+      
+      <!-- ルール1 -->
+      <div class="rule-card">
+        <div class="rule-num">RULE 01</div>
+        <div class="rule-title">1タスクは最大30分で計画</div>
+        <div class="r1-content">
+          <div class="gauge">
+            <div class="gauge-inner">
+              <div class="gauge-num">30</div>
+              <div class="gauge-label">分 MAX</div>
+            </div>
+          </div>
+          <div class="split-demo">
+            <div class="split-before"></div>
+            <div class="split-arrow">↓ 細かく分割</div>
+            <div class="split-after">
+              <div class="split-bar" style="width: 55%;"></div>
+              <div class="split-bar" style="width: 40%;"></div>
+              <div class="split-bar" style="width: 25%;"></div>
+            </div>
+            <div class="split-note">見積もり精度が向上</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ルール2 -->
+      <div class="rule-card">
+        <div class="rule-num">RULE 02</div>
+        <div class="rule-title">優先度と想定時間を設定</div>
+        <div class="priority-row">
+          <div class="priority-tag p1">優先度1</div>
+          <div class="priority-desc">今日必ず完了（必達）</div>
+        </div>
+        <div class="priority-row">
+          <div class="priority-tag p2">優先度2</div>
+          <div class="priority-desc">余力があれば着手</div>
+        </div>
+      </div>
+
+      <!-- ルール3 -->
+      <div class="rule-card">
+        <div class="rule-num">RULE 03</div>
+        <div class="rule-title">必達タスクに上限時間を設定</div>
+        <div class="limit-bar">
+          <div class="limit-bar-line"></div>
+        </div>
+        <div class="limit-labels">
+          <span>必達タスク</span>
+          <span>上限</span>
+          <span>余白（突発対応用）</span>
+        </div>
+        <div class="limit-table">
+          <div class="limit-col">
+            <div class="limit-col-title">フロントスタッフ</div>
+            <div class="limit-col-num">200分</div>
+            <div class="limit-col-sub">土日祝：100分</div>
+          </div>
+          <div class="limit-col">
+            <div class="limit-col-title">バックオフィス</div>
+            <div class="limit-col-num">300分</div>
+            <div class="limit-col-sub">土日祝：300分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右カラム：一日の流れ -->
+    <div class="right-col">
+      <div class="section-label">一日にやること</div>
+      
+      <div class="flow-container">
+        <div class="flow-timeline">
+          
+          <!-- 朝礼 -->
+          <div class="flow-item">
+            <div class="flow-card">
+              <div class="flow-time">9:00</div>
+              <div class="flow-name">朝礼</div>
+              <div class="flow-do">
+                チーム全体の動きを確認<br>
+                <strong>優先業務をすり合わせ</strong>
+              </div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-dot"></div>
+          </div>
+
+          <!-- 業務中 -->
+          <div class="flow-item">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+            <div class="flow-card">
+              <div class="flow-time">日中</div>
+              <div class="flow-name">業務中</div>
+              <div class="flow-do">
+                完了したら<strong>即Asana更新</strong><br>
+                関係者にはSlack報告
+              </div>
+            </div>
+          </div>
+
+          <!-- 終礼 -->
+          <div class="flow-item">
+            <div class="flow-card">
+              <div class="flow-time">17:50</div>
+              <div class="flow-name">終礼</div>
+              <div class="flow-do">
+                必達タスクの完了確認<br>
+                <strong>見積もりズレを把握</strong>
+              </div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-dot"></div>
+          </div>
+
+          <!-- 退勤前 -->
+          <div class="flow-item">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+            <div class="flow-card">
+              <div class="flow-time">退勤前</div>
+              <div class="flow-name">翌日準備</div>
+              <div class="flow-do">
+                <strong style="color: var(--red);">翌日の必達タスクを<br>上限内で設定して帰る</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- フッター -->
+      <div class="footer">
+        <div class="footer-title">毎日やること</div>
+        <div class="footer-steps">
+          <div class="footer-step">
+            <span class="footer-step-icon">📝</span>
+            30分以内に分割
+          </div>
+          <div class="footer-arrow">→</div>
+          <div class="footer-step">
+            <span class="footer-step-icon">⏱️</span>
+            上限内で計画
+          </div>
+          <div class="footer-arrow">→</div>
+          <div class="footer-step">
+            <span class="footer-step-icon">✅</span>
+            完了したら即更新
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="company">有限会社 陶庫</div>
+
+</div>
+
+</body>
+</html>
